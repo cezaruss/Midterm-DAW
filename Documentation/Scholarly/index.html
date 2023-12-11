@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MIR - Scholarly HTML</title>
+  <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+</head>
+
+<body prefix="schema: http://schema.org" style="font-family: 'Times New Roman', Times, serif; font-size: 15pt;">
+  <header>
+    <h1>Migration Reporting Tool</h1>
+  </header>
+  <div role="contentinfo">
+    <ol role="directory">
+      <li>
+        <a href="#abstract">
+          <span>1. </span>Abstract
+        </a>
+      </li>
+      <li>
+        <a href="#introduction">
+          <span>2. </span>Introduction
+        </a>
+      </li>
+      <li>
+        <a href="#motivation">
+          <span>3. </span>Motivation
+        </a>
+      </li>
+      <li>
+        <a href="#functionalities">
+          <span>4. </span> Functionalities
+        </a>
+        <ol role="directory">
+          <li>
+            <a href="#internal-data"><span>4.1 </span>Internal data</a>
+          </li>
+          <li>
+            <a href="#external-data"><span>4.2 </span>External data</a>
+          </li>
+          <li>
+            <a href="#linked-data"><span>4.3 </span>Conforming with linked data principles</a>
+          </li>
+          <li>
+            <a href="#in-depth-functionalities"><span>4.4 </span>Functionalities in depth</a>
+          </li>
+          <li>
+            <a href="#use-cases"><span>4.5 </span>Use cases</a>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <a href="#collaboration">
+          <span>5. </span> Work flow
+        </a>
+        <ol role="directory">
+          <li>
+            <a href="#openapi"><span>5.1 </span>Open API Specification</a>
+          </li>
+          <li>
+            <a href="#diagrams"><span>5.2 </span>Use Case and C4 Diagrams (Context and Container Diagrams)</a>
+          </li>
+          <li>
+            <a href="#scholarly"><span>5.3 </span>Scholarly HTML</a>
+          </li>
+          <li>
+            <a href="#progress"><span>5.4 </span>Project Progress</a>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <a href="#conclusion">
+          <span>6. </span> Conclusion
+        </a>
+      </li>
+      <li>
+        <a href="#references">
+          <span>7. </span> References
+        </a>
+      </li>
+    </ol>
+
+    <dl>
+      <dt>Authors</dt>
+      <dd>
+        <ol>
+          <li>
+            <a property="schema:author" href="https://github.com/dragos101" typeof="schema:Person">
+              <span property="schema:familyName">Baciu</span>
+              <span property="schema:givenName">Dragos</span>
+            </a>
+            <sup property="schema:contactPoint" typeof="schema:contactPoint">
+              <a property="schema:email" href="mailto:baciu.dragos17@gmail.com" title="send mail">Contact me! ☺</a>
+            </sup>
+          </li>
+          <li>
+            <a property="schema:author" href="https://github.com/cezaruss" typeof="schema:Person">
+              <span property="schema:familyName">Lupu</span>
+              <span property="schema:givenName">Cezar-Justinian</span>
+            </a>
+            <sup property="schema:contactPoint" typeof="schema:contactPoint">
+              <a property="schema:email" href="mailto:cezarlupu2012@gmail.com" title="send mail">Contact me! ☺</a>
+            </sup>
+          </li>
+        </ol>
+      </dd>
+    </dl>
+  </div>
+
+  <section typeof="schema:Article" property="schema:Abstract" id="abstract" role="doc-abstract">
+    <h2><span>1. </span>Abstract</h2>
+    <p>
+      Migration Reporting Tool is a web-based utility. Designed as a solution for visualizing, editing, and reporting migration data processes, the tool integrates user observations and data from various sensors to generate, in real-time, an interactive map depicting migrations conducted by different entities.
+    </p>
+  </section>
+
+  <section typeof="schema:Article" property="schema: articleSection" id="introduction" role="doc-introduction">
+    <h2><span>2. </span>Introduction</h2>
+    <p>
+        Migration Reporting Tool (MIR) is a project proposed at <span typeof="schema:Course" property="schema:url" resource="https://profs.info.uaic.ro/~busaco/teach/courses/wade/"><a role="doc-biblioref" href="https://profs.info.uaic.ro/~busaco/teach/courses/wade/"><span property="schema:name">Web Application Development course</span></a></span>. In order to resolve this task, the REST paradigm will be used. The communication between the server and the clients will be resolved by creating an REST API that will handle the desired comunnication in our web application.The migrations will be shown on an interactive map and they will be handled in different ways by the users, regarding the role of the client.
+    </p>
+
+  </section>
+
+  <section typeof="schema:Article" property="schema:articleSection" id="motivation" role="doc-motivation">
+    <h2><span>3. </span>Motivation</h2>
+    We opt for this project because it is an interisting problem in real life, regarding some situations: firstly, such a tool will be useful to see how Romanians go abroad because of the financial situation. Then, we taught about the migrations that took place because of the wars. Finally, we can see the impact of such an application when we want to track how birds or some species of animals migrates because of the weather/ climate changes.
+  </section>
+
+  <section typeof="schema:Article" property="schema:articleSection" id="functionalities" role="doc-functionalities">
+    <h2><span>4. </span>Functionalities</h2>
+    <section id="internal-data">
+      <h3><span>4.1 </span>Internal Data</h3>
+      <p>
+        The internal data structures and models chosen for MIR will be designed to efficiently store and manage migration data. In this context, we think about the following models:
+      </p>
+      <ul>
+        <li>Migration Object Model</li>
+        <li>User Role-Based Model</li>
+      </ul>
+      <p>
+        In the context diagram, we want to show this type of hadling. In the below diagram, we show that we will divide the data into two main components: users and migrations (see the databases).
+      </p>
+      <img src="../Diagrams/C1_Diagrama_MIR.png" alt="C4-Context-Diagram-of-MIR" style="width: 100%">
+      <p>
+        In the containers diagram, we focused on the interaction of clients, regarding their status (user or guest), in order to show the desired behaviour for our web application.
+      </p>
+      <img src="../Diagrams/ContainersDiagramMIR.png" alt="C4-Context-Diagram-of-MIR" style="width: 100%">
+      <p>
+        As seen in the diagrams above we'll be having the following functionalities an user can interact with throughout our website:
+        <ul>
+          <ol>
+            <li>Login</li>
+            <li>Register</li>
+            <li>Create a new migration</li>
+            <li>Update a migration</li>
+            <li>Delete a migration</li>
+            <li>See a migration in details</li>
+            <li>See a list of migrations</li>
+            <li>Interact with an inteligent map that displays migrations</li>
+          </ol>
+        </ul>
+      </p>
+      <p>
+        In the early stage of building the architecture with MIR, we have thought that the following models will suit perfectly the needs for our models:
+        <ul>
+          <ol>
+            <li>User</li>
+            <img src="swagger-models/user.png" alt="User-Model" style="width: 100%">
+            <li>Migration</li>
+            <img src="swagger-models/migration.png" alt="Migration-Model" style="width: 100%">
+            <li>MigrationType</li>
+            <img src="swagger-models/migration-type.png" alt="Migration-Type-Model" style="width: 100%">
+            <li>MigrationContext</li>
+            <img src="swagger-models/migration-context.png" alt="Migration-Context-Model" style="width: 100%">
+            <li>MigrationLocation</li>
+            <img src="swagger-models/migrationLocation.png" alt="Migration-Location-Model" style="width: 100%">
+          </ol>
+        </ul>
+      </p>
+    </section>
+    <section id="external-data">
+      <h3>4.2. External Data Sources</h3>
+      <p>
+        MIR will use  external data sources such as:
+      </p>
+      <ul>
+        <li>Migration Data API - that will help us in managing the functionalities</li>
+        <li>Geolocation Services - that will help us in showing the migrations on a map</li>
+        The interactive map will be implemented using <a href="https://docs.mapbox.com/">Mapbox</a> since it fits all criterias we are looking for.
+      </ul>
+    </section>
+    <section id="linked-data">
+      <h3>4.3 Conforming with linked data principles</h3>
+      <p>
+        The solution implemented in MIR will use linked data principles, ensuring data interoperability and accessibility. For our project, we think at these possible solutions:
+      </p>
+      <ul>
+        <li>Usage of Uniform Resource Identifiers (URIs) for data identification</li>
+        <li>Linking data elements through RDF (Resource Description Framework)</li>
+      </ul>
+    </section>
+    <section id="in-depth-functionalities">
+      <h3>4.4 Functionalities in depth</h3>
+      This section will describe the functionalities mentioned in <a href="#internal-data">4.1</a>
+      <ul>
+        <ol type="1">
+          <li>Login</li>
+          A guest can log in to become a user of the application in order to have access to some functionalities as: create a migration, delete a migration, edit a migration, see the list of migrations a user has created.
+          <li>Register</li>
+          A guest can register to become a user of the application in order to have access to some of the functionalities as: create a migration, delete a migration, edit a migration, see the list of migrations a user has created. A guest will be restrictioned from accessing every functionality on the website, but he will have access to: interaction with map, seeing one migration in detail.
+          <li>CRUD on migration</li>
+          This can only be performed by a user throughout our website. They will be able to create, read, update and delete a migration interacting with our interface.
+          <li>See a list of migrations</li>
+          This can only be performed by a user. This functionality will allow the user to see all the migrations he has created giving giving him the posibility of editing and deleting the migration.
+          <li>Interaction with inteligent map</li>
+          Either an user or a guest can have access to this functionality. They will be able to interact with this map to see what others have posted.
+        </ol>
+      </li>
+    </section>
+    <section id="use-cases">
+      <h3>4.5 Use cases</h3>
+      This section will descrive the functionalities mentioned in the following diagrams
+      <img src="../Diagrams/use-case-1.png" alt="Use-Case-Diagram1" style="width: 100%">
+      <img src="../Diagrams/use-case-2.png" alt="Use-Case-Diagram2" style="width: 100%">
+      Guest:
+      <ul>
+        <ol type="1">
+          <li>Will be able to interact with inteligent map.</li>
+          <li>Will be able to see detalied migration.</li>
+        </ol>
+      </ul>
+      User:
+      <ul>
+        <ol type="1">
+          <li>Will be able to create a migration.</li>
+          <li>Will be able to delete a migration.</li>
+          <li>Will be able to see a migration.</li>
+          <li>Will be able to edit a migration.</li>
+          <li>Will be able to see a list of created migrations.</li>
+          <li>Will be able to interact with inteligent map.</li>
+          <li>Will be able to see detailied migrations.</li>
+        </ol>
+      </ul>
+    </section>
+  </section>
+
+  <section typeof="schema:Article" property="schema:articleSection" id="collaboration" role="doc-collaboration">
+    <h2><span>5. </span>Work flow</h2>
+    <p>We will collaborate using GitHub (<a href="https://github.com/Dragos101/ProiectWeb">Github</a>). Our collaboration includes:</p>
+    <ul>
+      <li>Creating diagrams collaboratively.</li>
+      <li>Developing the OpenAPI specification by Dragos.</li>
+      <li>Implementing Scholarly HTML by Cezar.</li>
+      <li>Tracking project progress regularly.</li>
+    </ul>
+    
+    <section typeof="schema:Article" property="schema:articleSection" id="openapi" role="doc-openapi">
+      <h3><span>5.1 </span>OpenAPI Specification</h3>
+      <p>The OpenAPI specification outlines the REST API design for handling communication within the web application. The specification can be found <a href="https://app.swaggerhub.com/apis/DragosBaciu/MIR-Template/1.0.0">here</a>. </p>
+    </section>
+  
+    <section typeof="schema:Article" property="schema:articleSection" id="diagrams" role="doc-diagrams">
+      <h3><span>5.2 </span>Use Case and C4 Diagrams</h3>
+      <p>We have created Use Case and C4 diagrams. The C4 diagrams illustrate the context and container levels. The diagrams can be found <a href="https://github.com/Dragos101/ProiectWeb/tree/main/Documentation/Diagrams">here</a>.</p>
+    </section>
+  
+    <section typeof="schema:Article" property="schema:articleSection" id="scholarly" role="doc-scholarly">
+      <h3><span>5.3 </span>Scholarly HTML</h3>
+      <p>The Scholarly HTML structure is developed in order to present the most useful things to present about our project. This article will be updated coresponding with the desired info for each deadline of this project.</p>
+    </section>
+  
+    <section typeof="schema:Article" property="schema:articleSection" id="progress" role="doc-progress">
+      <h3><span>5.4 </span>Project Progress</h3>
+      <p>We regularly update and maintain the project progress tracking to ensure timely completion of tasks. The tracking can be found <a href="https://github.com/Dragos101/ProiectWeb/blob/main/README.md">here</a>, at the section named Project Progress (see the Table of Contents from README).</p>
+    </section>
+  </section>
+   
+  <section typeof="schema:Article" property="schema:articleSection" id="conclusion" role="doc-conclusion">
+    <h2><span>6. </span>Conclusion</h2>
+    This section will be updated before the final presentation for this project.
+    
+  </section>
+
+  <section typeof = "schema:Article" property="schema:articleSection" id="references" role="doc-references">
+    <h2><span>7. </span>References</h2>
+    <ol>
+      <li typeof="schema:WebPage" role="doc-biblioentry"
+          resource="https://profs.info.uaic.ro/~busaco/teach/courses/wade/web-film.html"
+          property="schema:citation" id="wade">
+        <cite property="schema:name">
+          <a href="https://profs.info.uaic.ro/~busaco/teach/courses/wade/web-film.html">Web Application Course</a>
+        </cite>                
+      </li>
+      <li typeof="schema:WebPage" role="doc-biblioentry"
+          resource="https://restfulapi.net/"
+          property="schema:citation" id="restful-api-website">
+        <cite property="schema:name">
+          <a href="https://restfulapi.net/">Restful API website</a>
+        </cite> 
+      </li>
+      <li typeof="schema:WebPage" role="doc-biblioentry"
+          resource="https://www.migrationdataportal.org/international-data?i=stock_abs_&t=2020"
+          property="schema:citation" id="migration-data-portal">
+        <cite property="schema:name">
+          <a href="https://www.migrationdataportal.org/international-data?i=stock_abs_&t=2020">Migration Data Portal</a>
+        </cite>
+      </li>
+      <li typeof="schema:WebPage" role="doc-biblioentry"
+          resource="https://www.un.org/development/desa/pd/data-landing-page"
+          property="schema:citation" id="un-development-data-landing">
+        <cite property="schema:name">
+          <a href="https://www.un.org/development/desa/pd/data-landing-page">UN Development Datasets</a>
+        </cite>
+      </li>
+      <li typeof="schema:WebPage" role="doc-biblioentry"
+          resource="https://docs.mapbox.com/"
+          property="schema:citation" id="map-box">
+        <cite property="schema:name">
+          <a href="https://docs.mapbox.com/">Mapbox Documentation</a>
+        </cite>
+      </li>
+    </ol>   
+  </section>
+  <br>
+  <footer>
+    <p>
+        For more detailed information about the projects, visit: <a href="https://profs.info.uaic.ro/~busaco/teach/courses/wade/" target="_blank">Web Application Development Course</a>.
+    </p>
+  </footer>  
+</body>
+</html>
