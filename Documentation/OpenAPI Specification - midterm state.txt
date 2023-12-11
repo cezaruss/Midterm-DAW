@@ -1,0 +1,329 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/DragosBaciu/MIR-Template/1.0.0
+info:
+  description: MIR-API
+  version: "1.0.0"
+  title: MIR-Template
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Migrations
+  - name: User
+paths:
+  /user/register:
+    post:
+      tags:
+        - User
+      summary: 'Register a user'
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "201":
+          description: "Successfully created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    example: "baciu.dragos17@gmail.com"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        "400": 
+          description: "Bad request"
+  /user/login:
+    post:
+      tags:
+        - User
+      summary: 'Logs a user'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "201":
+          description: "Successfully created"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    example: "baciu.dragos17@gmail.com"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        "400": 
+          description: "Bad request"
+  /migration:
+    post:
+      tags:
+        - Migrations
+      summary: "Create new migration"
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Migration'
+      responses:
+        '201':
+          description: "Successfully created"
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  id: 
+                    type: string
+                    format: uuid
+                    example: "d290f1ee-6c54-4b01-90e6-d701748f0852"
+        "400":
+          description: "Bad request"
+    get:
+      tags:
+        - Migrations
+      summary: "Gets all migrations created"
+      responses: 
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Migration'
+        "204":
+          description: No migrations available
+        "500":
+          description: Internat server error
+  /migration/{migrationId}:
+    get:
+      tags:
+        - Migrations
+      summary: Get a specific migration
+      parameters: 
+        - name: migrationId
+          in: path
+          description: ID of migration to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses: 
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Migration"
+        "400":
+          description: Invalid migration ID
+        "404":
+          description: No migration found
+        "500": 
+          description: Internal server error
+    delete:
+      tags:
+        - Migrations
+      summary: Deletes a specific migration
+      parameters:
+        - name: migrationId
+          in: path
+          description: ID of migration to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Migration"
+        "400":
+          description: Invalid migration ID
+        "404":
+          description: No migration found
+        "500": 
+          description: Internal server error
+    patch:
+      tags:
+        - Migrations
+      summary: Updates a specific migration
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Migration'
+      parameters:
+        - name: migrationId
+          in: path
+          description: ID of migration to edit
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses: 
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Migration'
+        "400":
+          description: Invalid migration ID
+        "404":
+          description: No migration found
+        "500": 
+          description: Internal server error
+  /migration/list/{userId}:
+    get:
+      tags:
+        - Migrations
+      summary: Returns a list of all migrations a user has created
+      parameters: 
+        - name: userId
+          in: path
+          description: ID for user's list of migrations
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses: 
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Migration'
+        "400":
+          description: Invalid migration ID
+        "404":
+          description: No migration found
+        "500": 
+          description: Internal server error
+components:
+  schemas:
+    User: 
+      type: object
+      required: 
+        - email
+        - password
+      properties:
+        id: 
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        email:
+          type: string
+          nullable: false
+          example: "baciu.dragos17@gmail.com"
+        password: 
+          type: string
+          nullable: false
+          example: "parola123"
+    Migration:
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0852"
+        userId:
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        migrationTypeId: 
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0854"
+        migrationContextId:
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0856"
+        migrationLocationId:
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0859"
+    MigrationType: 
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0859"
+        category:
+          type: string
+          enum: 
+            - birds
+            - humans
+            - aliens
+            - animals
+          example: "birds"
+    MigrationContext:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0859"
+        season:
+          type: string
+          enum: 
+            - summer
+            - autumn
+            - winter
+            - spring
+          example: "winter"
+        working:
+          type: string
+          example: "Seasonal Agricultural Migration"
+        politicFactors:
+          type: string
+          example: "war"
+        calamity:
+          type: string
+          example: "Pandemic"
+        description: 
+          type: string
+          example: "A good day to see birds flying"
+        thumbnailUrl: 
+          type: string
+          example: "https://cdn.discordapp.com/attachments/1164897292432703571/1178342549967089694/image.png?ex=6575cc04&is=65635704&hm=03d7d48f51dcd676d32383e773c0094ee76491809aba4652f9fc3ef2a39dc333&"
+    MigrationLocation:
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0859"
+        longitude:
+          type: number
+          format: double
+          example: -77.0364
+        latitude:
+          type: number
+          format: double
+          example: 38.8951
